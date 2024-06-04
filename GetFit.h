@@ -3,7 +3,6 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_GetFit.h"
 
-// Struct to hold food data
 struct FoodData {
     int caloriesPer100g;
     double proteinPer100g;
@@ -26,4 +25,5 @@ private slots:
 
 private:
     Ui::GetFitClass ui;
+    void populateComboBox(QComboBox* comboBox);
 };
