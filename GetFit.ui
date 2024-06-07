@@ -25,7 +25,11 @@
 					<widget class="QComboBox" name="comboBoxMeal"/>
 				</item>
 				<item>
-					<widget class="QLineEdit" name="lineEditGrams"/>
+					<widget class="QLineEdit" name="lineEditGrams">
+						<property name="placeholderText">
+							<string>Enter grams</string>
+						</property>
+					</widget>
 				</item>
 				<item>
 					<widget class="QPushButton" name="addButtonMeal">
@@ -42,6 +46,13 @@
 						<widget class="QWidget" name="scrollAreaWidgetContentsMeal">
 							<layout class="QVBoxLayout" name="verticalLayoutScrollAreaMeal"/>
 						</widget>
+					</widget>
+				</item>
+				<item>
+					<widget class="QLabel" name="sumLabel">
+						<property name="text">
+							<string>Total: 0 Calories, 0g Protein, 0g Carbs, 0g Fat</string>
+						</property>
 					</widget>
 				</item>
 			</layout>
