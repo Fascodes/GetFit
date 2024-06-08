@@ -8,7 +8,7 @@ EditMealDialog::EditMealDialog(const QString& foodName, int grams, QWidget* pare
     QLabel* label = new QLabel(QString("Edit grams for %1").arg(foodName));
     layout->addWidget(label);
 
-    lineEditGrams = new QLineEdit(QString::number(grams));
+    lineEditGrams = new QLineEdit();
     layout->addWidget(lineEditGrams);
 
     QPushButton* buttonOk = new QPushButton("OK");

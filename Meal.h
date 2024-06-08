@@ -12,6 +12,7 @@ private:
     double carbs;
     double fat;
 public:
+    Meal() {};
     void addFood(const FoodData food, int grams);
     void sumFood();
     void editFood(const FoodData& food, const int grams, const int newGrams);
@@ -21,8 +22,6 @@ public:
     double getProtein();
     double getCarbs();
     double getFat();
-    /*void editFood();
-    void removeFood();*/
 };
 
 bool equal(std::tuple<FoodData, int> food, const FoodData& other, const int otherGrams);
@@ -32,6 +31,14 @@ class Day
 private:
     std::vector<Meal> day_food;
     int date;
+    int calories;
+    double protein;
+    double carbs;
+    double fat;
 public:
-
+    Day() {};
+    int getCalories();
+    double getProtein();
+    double getCarbs();
+    double getFat();
 };
