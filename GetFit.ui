@@ -85,8 +85,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>562</width>
-             <height>138</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaBreakfast"/>
@@ -138,8 +138,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>562</width>
-             <height>138</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaLunch"/>
@@ -191,8 +191,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>562</width>
-             <height>138</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaDinner"/>
@@ -244,8 +244,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>562</width>
-             <height>138</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSnack"/>
@@ -298,7 +298,7 @@
              <x>0</x>
              <y>0</y>
              <width>562</width>
-             <height>138</height>
+             <height>86</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSupper"/>
@@ -314,6 +314,13 @@
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="sumLabelDay">
+      <property name="text">
+       <string>Day Total: 0 Calories, 0g Protein, 0g Carbs, 0g Fat</string>
+      </property>
      </widget>
     </item>
    </layout>
