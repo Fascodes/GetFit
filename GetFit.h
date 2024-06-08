@@ -8,6 +8,7 @@
 #include "Fooddata.h"
 #include "Foods.h"
 #include "Meal.h"
+#include "EditMealDialog.h"
 
 class GetFit : public QMainWindow
 {
