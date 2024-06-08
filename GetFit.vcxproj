@@ -92,11 +92,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Meal.cpp" />
     <QtRcc Include="GetFit.qrc" />
     <QtUic Include="GetFit.ui" />
     <QtMoc Include="GetFit.h" />
+    <ClCompile Include="Foods.cpp" />
     <ClCompile Include="GetFit.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Fooddata.h" />
+    <ClInclude Include="Foods.h" />
+    <ClInclude Include="Meal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
