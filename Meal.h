@@ -14,8 +14,8 @@ private:
 public:
     void addFood(const FoodData food, int grams);
     void sumFood();
-    void editFood(size_t mealIndex, int newGrams);
-    void removeFood(size_t mealIndex);
+    void editFood(const FoodData& food, const int grams, const int newGrams);
+    void removeFood(const FoodData& other, const int otherGrams);
     void displayMeal() const;
     int getCalories();
     double getProtein();
@@ -24,6 +24,8 @@ public:
     /*void editFood();
     void removeFood();*/
 };
+
+bool equal(std::tuple<FoodData, int> food, const FoodData& other, const int otherGrams);
 
 class Day
 {

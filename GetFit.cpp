@@ -92,8 +92,48 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
         .arg(totalCarbs)
         .arg(totalFat);
 
+    // Create the container widget
+    QWidget* containerWidget = new QWidget();
+    QHBoxLayout* hLayout = new QHBoxLayout(containerWidget);
+    hLayout->setContentsMargins(0, 0, 0, 0);  // Optional: to remove the margins
+
+    // Create the label and buttons
     QLabel* newLabel = new QLabel(mealText);
-    layout->addWidget(newLabel);
+    QPushButton* removeButton = new QPushButton("Remove");
+    QPushButton* editButton = new QPushButton("Edit");
+
+    // Add label and buttons to the layout
+    hLayout->addWidget(newLabel);
+    hLayout->addStretch();  // Add a stretch to push the buttons to the right
+    hLayout->addWidget(removeButton);
+    hLayout->addWidget(editButton);
+
+    // Add the container widget to the main layout
+    layout->addWidget(containerWidget);
+
+    // Connect buttons to their respective slots (assuming you have implemented them)
+    connect(removeButton, &QPushButton::clicked, [this, containerWidget, meal, layout, sumLabel, foodData, grams]() {
+        meal->removeFood(foodData, grams);
+        layout->removeWidget(containerWidget);
+        containerWidget->deleteLater();
+        updateSumLabel(meal, sumLabel);
+        });
+
+    connect(editButton, &QPushButton::clicked, [this, containerWidget, meal, layout, sumLabel, foodData, grams, newLabel]() {
+        EditMealDialog editDialog(QString::fromStdString(foodData.name), grams, this);
+        if (editDialog.exec() == QDialog::Accepted) {
+            int newGrams = editDialog.getGrams();
+            meal->editFood(foodData, grams, newGrams); // Adjust the meal with new grams
+            newLabel->setText(QString("%1 - %2 grams - %3 Calories - %4g Protein - %5g Carbs - %6g Fat")
+                .arg(QString::fromStdString(foodData.name))
+                .arg(newGrams)
+                .arg((foodData.caloriesPer100g * newGrams) / 100)
+                .arg((foodData.proteinPer100g * newGrams) / 100)
+                .arg((foodData.carbsPer100g * newGrams) / 100)
+                .arg((foodData.fatPer100g * newGrams) / 100));
+            updateSumLabel(meal, sumLabel);
+        }
+        });
 
     updateSumLabel(meal, sumLabel);
 }

@@ -24,24 +24,29 @@ void Meal::sumFood() {
     }
 }
 
-void Meal::editFood(size_t mealIndex, int newGrams) {
-    if (mealIndex < meal.size()) {
-        std::get<1>(meal[mealIndex]) = newGrams;
-        sumFood();
+
+bool equal(std::tuple<FoodData, int> food, const FoodData& other, const int otherGrams)
+{
+    return other.caloriesPer100g == std::get<0>(food).caloriesPer100g && other.proteinPer100g == std::get<0>(food).proteinPer100g && other.carbsPer100g == std::get<0>(food).carbsPer100g && other.fatPer100g == std::get<0>(food).fatPer100g && std::get<1>(food) == otherGrams;
+};
+
+void Meal::editFood(const FoodData& food, const int grams, const int newGrams) 
+{
+    for (const auto& item : meal) {
+        const FoodData& food = std::get<0>(item);
+        int grams = std::get<1>(item);
     }
-    else {
-        throw std::out_of_range("Meal index out of range");
-    }
+    sumFood();
 }
 
-void Meal::removeFood(size_t mealIndex) {
-    if (mealIndex < meal.size()) {
-        meal.erase(meal.begin() + mealIndex);
-        sumFood();
-    }
-    else {
-        throw std::out_of_range("Meal index out of range");
-    }
+
+
+void Meal::removeFood(const FoodData& other, const int otherGrams) {
+    size_t foodIndex = 0;
+    while (foodIndex < meal.size() && !(equal(meal[foodIndex], other, otherGrams)))foodIndex++;
+    
+    meal.erase(meal.begin() + foodIndex);
+    sumFood();
 }
 
 void Meal::displayMeal() const {
