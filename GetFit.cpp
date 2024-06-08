@@ -122,6 +122,10 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
     connect(editButton, &QPushButton::clicked, [this, containerWidget, meal, layout, sumLabel, foodData, grams, newLabel]() {
         EditMealDialog editDialog(QString::fromStdString(foodData.name), grams, this);
         if (editDialog.exec() == QDialog::Accepted) {
+            if (editDialog.getGrams() <= 0) {
+                QMessageBox::warning(this, "Invalid Input", "Please enter a valid number of grams.");
+                return;
+            }
             int newGrams = editDialog.getGrams();
             meal->editFood(foodData, grams, newGrams); // Adjust the meal with new grams
             newLabel->setText(QString("%1 - %2 grams - %3 Calories - %4g Protein - %5g Carbs - %6g Fat")
