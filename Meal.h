@@ -22,6 +22,7 @@ public:
     double getProtein();
     double getCarbs();
     double getFat();
+    void clear();
 };
 
 bool equal(std::tuple<FoodData, int> food, const FoodData& other, const int otherGrams);

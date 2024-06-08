@@ -38,7 +38,12 @@ GetFit::GetFit(QWidget* parent)
     connect(ui.addButtonDinner, &QPushButton::clicked, [this]() { addMeal(&dinner, ui.verticalLayoutScrollAreaDinner, sumLabelDinner, ui.comboBoxDinner, ui.lineEditGramsDinner); });
     connect(ui.addButtonSnack, &QPushButton::clicked, [this]() { addMeal(&snack, ui.verticalLayoutScrollAreaSnack, sumLabelSnack, ui.comboBoxSnack, ui.lineEditGramsSnack); });
     connect(ui.addButtonSupper, &QPushButton::clicked, [this]() { addMeal(&supper, ui.verticalLayoutScrollAreaSupper, sumLabelSupper, ui.comboBoxSupper, ui.lineEditGramsSupper); });
-
+    
+    connect(ui.removeAllBreakfast, &QPushButton::clicked, [this]() { removeMeal(&breakfast, ui.verticalLayoutScrollAreaBreakfast, sumLabelBreakfast); });
+    connect(ui.removeAllLunch, &QPushButton::clicked, [this]() { removeMeal(&lunch, ui.verticalLayoutScrollAreaLunch, sumLabelLunch); });
+    connect(ui.removeAllDinner, &QPushButton::clicked, [this]() { removeMeal(&dinner, ui.verticalLayoutScrollAreaDinner, sumLabelDinner); });
+    connect(ui.removeAllSnack, &QPushButton::clicked, [this]() { removeMeal(&snack, ui.verticalLayoutScrollAreaSnack, sumLabelSnack); });
+    connect(ui.removeAllSupper, &QPushButton::clicked, [this]() { removeMeal(&supper, ui.verticalLayoutScrollAreaSupper, sumLabelSupper); });
     // Connect the comboBoxViewSelection to switch the stacked widget views
     connect(ui.comboBoxViewSelection, QOverload<int>::of(&QComboBox::currentIndexChanged),
         ui.stackedWidget, &QStackedWidget::setCurrentIndex);
@@ -139,6 +144,22 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
         }
         });
 
+    updateSumLabel(meal, sumLabel);
+}
+
+void GetFit::removeMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel)
+{
+    // Clear the meal vector
+    meal->clear();
+
+    // Remove all widgets from the layout
+    QLayoutItem* item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+    meal->sumFood();
+    // Update the sum label to reflect the cleared meal
     updateSumLabel(meal, sumLabel);
 }
 

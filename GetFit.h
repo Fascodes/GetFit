@@ -20,6 +20,7 @@ public:
 
 private slots:
     void addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBox* comboBox, QLineEdit* lineEdit);
+    void removeMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel);
 
 private:
     Ui::GetFitClass ui;
