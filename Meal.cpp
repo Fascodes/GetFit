@@ -62,6 +62,10 @@ void Meal::displayMeal() const {
     std::cout << "Total Fat: " << fat << " g\n";
 }
 
+void Meal::clear() {
+    meal.clear(); // Clear all food items from the vector
+}
+
 
 int Meal::getCalories()
 {

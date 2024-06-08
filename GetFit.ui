@@ -47,7 +47,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="breakfastView">
        <layout class="QVBoxLayout" name="verticalLayoutBreakfastView">
@@ -75,6 +75,13 @@
           </property>
          </widget>
         </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="removeAllBreakfast">
+          <property name="text">
+           <string>Remove All</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QScrollArea" name="scrollAreaBreakfast">
           <property name="widgetResizable">
@@ -86,7 +93,7 @@
              <x>0</x>
              <y>0</y>
              <width>562</width>
-             <height>138</height>
+             <height>108</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaBreakfast"/>
@@ -128,6 +135,13 @@
           </property>
          </widget>
         </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="removeAllLunch">
+          <property name="text">
+           <string>Remove All</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QScrollArea" name="scrollAreaLunch">
           <property name="widgetResizable">
@@ -139,7 +153,7 @@
              <x>0</x>
              <y>0</y>
              <width>562</width>
-             <height>138</height>
+             <height>108</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaLunch"/>
@@ -181,6 +195,13 @@
           </property>
          </widget>
         </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="removeAllDinner">
+          <property name="text">
+           <string>Remove All</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QScrollArea" name="scrollAreaDinner">
           <property name="widgetResizable">
@@ -192,7 +213,7 @@
              <x>0</x>
              <y>0</y>
              <width>562</width>
-             <height>138</height>
+             <height>108</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaDinner"/>
@@ -234,6 +255,13 @@
           </property>
          </widget>
         </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="removeAllSnack">
+          <property name="text">
+           <string>Remove All</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QScrollArea" name="scrollAreaSnack">
           <property name="widgetResizable">
@@ -245,7 +273,7 @@
              <x>0</x>
              <y>0</y>
              <width>562</width>
-             <height>138</height>
+             <height>108</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSnack"/>
@@ -287,6 +315,13 @@
           </property>
          </widget>
         </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="removeAllSupper">
+          <property name="text">
+           <string>Remove All</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QScrollArea" name="scrollAreaSupper">
           <property name="widgetResizable">
@@ -298,7 +333,7 @@
              <x>0</x>
              <y>0</y>
              <width>562</width>
-             <height>138</height>
+             <height>108</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSupper"/>
