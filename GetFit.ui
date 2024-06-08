@@ -1,68 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-	<class>GetFitClass</class>
-	<widget class="QMainWindow" name="GetFitClass">
-		<property name="geometry">
-			<rect>
-				<x>0</x>
-				<y>0</y>
-				<width>600</width>
-				<height>400</height>
-			</rect>
-		</property>
-		<property name="windowTitle">
-			<string>GetFit</string>
-		</property>
-		<widget class="QWidget" name="centralWidget">
-			<layout class="QVBoxLayout" name="verticalLayout">
-				<item>
-					<widget class="QLabel" name="labelMeal">
-						<property name="text">
-							<string>Meal</string>
-						</property>
-					</widget>
-				</item>
-				<item>
-					<widget class="QComboBox" name="comboBoxMeal"/>
-				</item>
-				<item>
-					<widget class="QLineEdit" name="lineEditGrams">
-						<property name="placeholderText">
-							<string>Enter grams</string>
-						</property>
-					</widget>
-				</item>
-				<item>
-					<widget class="QPushButton" name="addButtonMeal">
-						<property name="text">
-							<string>Add Meal</string>
-						</property>
-					</widget>
-				</item>
-				<item>
-					<widget class="QScrollArea" name="scrollAreaMeal">
-						<property name="widgetResizable">
-							<bool>true</bool>
-						</property>
-						<widget class="QWidget" name="scrollAreaWidgetContentsMeal">
-							<layout class="QVBoxLayout" name="verticalLayoutScrollAreaMeal"/>
-						</widget>
-					</widget>
-				</item>
-				<item>
-					<widget class="QLabel" name="sumLabel">
-						<property name="text">
-							<string>Total: 0 Calories, 0g Protein, 0g Carbs, 0g Fat</string>
-						</property>
-					</widget>
-				</item>
-			</layout>
-		</widget>
-		<widget class="QMenuBar" name="menuBar"/>
-		<widget class="QToolBar" name="mainToolBar"/>
-		<widget class="QStatusBar" name="statusBar"/>
-	</widget>
-	<resources>
-		<include location="GetFit.qrc"/>
-	</resources>
-	<connections/>
+ <class>GetFitClass</class>
+ <widget class="QMainWindow" name="GetFitClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GetFit</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QComboBox" name="comboBoxViewSelection">
+      <item>
+       <property name="text">
+        <string>Breakfast</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Lunch</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Dinner</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Snack</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Supper</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="breakfastView">
+       <layout class="QVBoxLayout" name="verticalLayoutBreakfastView">
+        <item>
+         <widget class="QLabel" name="labelBreakfast">
+          <property name="text">
+           <string>Breakfast</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBoxBreakfast"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditGramsBreakfast">
+          <property name="placeholderText">
+           <string>Enter grams</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="addButtonBreakfast">
+          <property name="text">
+           <string>Add Meal</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QScrollArea" name="scrollAreaBreakfast">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContentsBreakfast">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>562</width>
+             <height>138</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayoutScrollAreaBreakfast"/>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="sumLabelBreakfast">
+          <property name="text">
+           <string>Total: 0 Calories, 0g Protein, 0g Carbs, 0g Fat</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="lunchView">
+       <layout class="QVBoxLayout" name="verticalLayoutLunchView">
+        <item>
+         <widget class="QLabel" name="labelLunch">
+          <property name="text">
+           <string>Lunch</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBoxLunch"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditGramsLunch">
+          <property name="placeholderText">
+           <string>Enter grams</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="addButtonLunch">
+          <property name="text">
+           <string>Add Meal</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QScrollArea" name="scrollAreaLunch">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContentsLunch">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>562</width>
+             <height>138</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayoutScrollAreaLunch"/>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="sumLabelLunch">
+          <property name="text">
+           <string>Total: 0 Calories, 0g Protein, 0g Carbs, 0g Fat</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="dinnerView">
+       <layout class="QVBoxLayout" name="verticalLayoutDinnerView">
+        <item>
+         <widget class="QLabel" name="labelDinner">
+          <property name="text">
+           <string>Dinner</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBoxDinner"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditGramsDinner">
+          <property name="placeholderText">
+           <string>Enter grams</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="addButtonDinner">
+          <property name="text">
+           <string>Add Meal</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QScrollArea" name="scrollAreaDinner">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContentsDinner">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>562</width>
+             <height>138</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayoutScrollAreaDinner"/>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="sumLabelDinner">
+          <property name="text">
+           <string>Total: 0 Calories, 0g Protein, 0g Carbs, 0g Fat</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="snackView">
+       <layout class="QVBoxLayout" name="verticalLayoutSnackView">
+        <item>
+         <widget class="QLabel" name="labelSnack">
+          <property name="text">
+           <string>Snack</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBoxSnack"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditGramsSnack">
+          <property name="placeholderText">
+           <string>Enter grams</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="addButtonSnack">
+          <property name="text">
+           <string>Add Meal</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QScrollArea" name="scrollAreaSnack">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContentsSnack">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>562</width>
+             <height>138</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSnack"/>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="sumLabelSnack">
+          <property name="text">
+           <string>Total: 0 Calories, 0g Protein, 0g Carbs, 0g Fat</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="supperView">
+       <layout class="QVBoxLayout" name="verticalLayoutSupperView">
+        <item>
+         <widget class="QLabel" name="labelSupper">
+          <property name="text">
+           <string>Supper</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBoxSupper"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditGramsSupper">
+          <property name="placeholderText">
+           <string>Enter grams</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="addButtonSupper">
+          <property name="text">
+           <string>Add Meal</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QScrollArea" name="scrollAreaSupper">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContentsSupper">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>562</width>
+             <height>138</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSupper"/>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="sumLabelSupper">
+          <property name="text">
+           <string>Total: 0 Calories, 0g Protein, 0g Carbs, 0g Fat</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>600</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <resources>
+  <include location="GetFit.qrc"/>
+ </resources>
+ <connections/>
 </ui>

@@ -8,6 +8,8 @@
 #include <QWidget>
 #include <QString>
 #include <QMessageBox>
+#include <QCoreApplication>
+#include <fstream>
 
 GetFit::GetFit(QWidget* parent)
     : QMainWindow(parent)
@@ -16,13 +18,30 @@ GetFit::GetFit(QWidget* parent)
 
     ui.setupUi(this);
 
-    // Initialize the sum label and add it to the layout
-    sumLabel = ui.sumLabel;
+    // Initialize the sum labels
+    sumLabelBreakfast = ui.sumLabelBreakfast;
+    sumLabelLunch = ui.sumLabelLunch;
+    sumLabelDinner = ui.sumLabelDinner;
+    sumLabelSnack = ui.sumLabelSnack;
+    sumLabelSupper = ui.sumLabelSupper;
 
-    // Assume that foods.readFood() is called somewhere to populate the foods vector
-    populateComboBox(ui.comboBoxMeal);
+    // Populate the comboBoxes with data
+    populateComboBox(ui.comboBoxBreakfast);
+    populateComboBox(ui.comboBoxLunch);
+    populateComboBox(ui.comboBoxDinner);
+    populateComboBox(ui.comboBoxSnack);
+    populateComboBox(ui.comboBoxSupper);
 
-    connect(ui.addButtonMeal, &QPushButton::clicked, this, &GetFit::addMeal);
+    // Connect the add meal buttons
+    connect(ui.addButtonBreakfast, &QPushButton::clicked, [this]() { addMeal(&breakfast, ui.verticalLayoutScrollAreaBreakfast, sumLabelBreakfast, ui.comboBoxBreakfast, ui.lineEditGramsBreakfast); });
+    connect(ui.addButtonLunch, &QPushButton::clicked, [this]() { addMeal(&lunch, ui.verticalLayoutScrollAreaLunch, sumLabelLunch, ui.comboBoxLunch, ui.lineEditGramsLunch); });
+    connect(ui.addButtonDinner, &QPushButton::clicked, [this]() { addMeal(&dinner, ui.verticalLayoutScrollAreaDinner, sumLabelDinner, ui.comboBoxDinner, ui.lineEditGramsDinner); });
+    connect(ui.addButtonSnack, &QPushButton::clicked, [this]() { addMeal(&snack, ui.verticalLayoutScrollAreaSnack, sumLabelSnack, ui.comboBoxSnack, ui.lineEditGramsSnack); });
+    connect(ui.addButtonSupper, &QPushButton::clicked, [this]() { addMeal(&supper, ui.verticalLayoutScrollAreaSupper, sumLabelSupper, ui.comboBoxSupper, ui.lineEditGramsSupper); });
+
+    // Connect the comboBoxViewSelection to switch the stacked widget views
+    connect(ui.comboBoxViewSelection, QOverload<int>::of(&QComboBox::currentIndexChanged),
+        ui.stackedWidget, &QStackedWidget::setCurrentIndex);
 }
 
 GetFit::~GetFit()
@@ -45,26 +64,25 @@ void GetFit::populateComboBox(QComboBox* comboBox)
         QString itemText = QString("%1 - %2 calories %3 protein %4 carbs %5 fat / 100g").arg(QString::fromStdString(food.name)).arg(food.caloriesPer100g).arg(food.proteinPer100g).arg(food.carbsPer100g).arg(food.fatPer100g);
         FoodData foodData = { food.name, food.caloriesPer100g, food.proteinPer100g, food.carbsPer100g, food.fatPer100g };
         comboBox->addItem(itemText, QVariant::fromValue(foodData));
-    };
-
+    }
 }
 
-void GetFit::addMeal()
+void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBox* comboBox, QLineEdit* lineEdit)
 {
-    QString selectedMeal = ui.comboBoxMeal->currentText();
+    QString selectedMeal = comboBox->currentText();
     bool ok;
-    int grams = ui.lineEditGrams->text().toInt(&ok);
+    int grams = lineEdit->text().toInt(&ok);
     if (!ok || grams <= 0) {
         QMessageBox::warning(this, "Invalid Input", "Please enter a valid number of grams.");
         return;
     }
 
-    FoodData foodData = ui.comboBoxMeal->currentData().value<FoodData>();
+    FoodData foodData = comboBox->currentData().value<FoodData>();
     int totalCalories = (foodData.caloriesPer100g * grams) / 100;
     double totalProtein = (foodData.proteinPer100g * grams) / 100;
     double totalCarbs = (foodData.carbsPer100g * grams) / 100;
     double totalFat = (foodData.fatPer100g * grams) / 100;
-    breakfast.addFood(foodData, grams);
+    meal->addFood(foodData, grams);
 
     QString mealText = QString("%1 - %2 grams - %3 Calories - %4g Protein - %5g Carbs - %6g Fat")
         .arg(selectedMeal.split(" - ").first())
@@ -75,18 +93,18 @@ void GetFit::addMeal()
         .arg(totalFat);
 
     QLabel* newLabel = new QLabel(mealText);
-    ui.verticalLayoutScrollAreaMeal->addWidget(newLabel);
+    layout->addWidget(newLabel);
 
-    updateSumLabel(breakfast);
+    updateSumLabel(meal, sumLabel);
 }
 
-void GetFit::updateSumLabel(Meal meal)
+void GetFit::updateSumLabel(Meal* meal, QLabel* sumLabel)
 {
     QString sumText = QString("Total: %1 Calories, %2g Protein, %3g Carbs, %4g Fat")
-        .arg(meal.getCalories())
-        .arg(meal.getProtein())
-        .arg(meal.getCarbs())
-        .arg(meal.getFat());
+        .arg(meal->getCalories())
+        .arg(meal->getProtein())
+        .arg(meal->getCarbs())
+        .arg(meal->getFat());
 
     sumLabel->setText(sumText);
 }
