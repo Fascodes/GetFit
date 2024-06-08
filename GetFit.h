@@ -9,10 +9,6 @@
 #include "Foods.h"
 #include "Meal.h"
 
-
-
-
-
 class GetFit : public QMainWindow
 {
     Q_OBJECT
@@ -22,18 +18,22 @@ public:
     ~GetFit();
 
 private slots:
-    void addMeal();
+    void addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBox* comboBox, QLineEdit* lineEdit);
 
 private:
     Ui::GetFitClass ui;
     void populateComboBox(QComboBox* comboBox);
 
-    void updateSumLabel(Meal meal);
+    void updateSumLabel(Meal* meal, QLabel* sumLabel);
 
     Meal breakfast;
-    Meal II_breakfast;
+    Meal lunch;
     Meal dinner;
     Meal snack;
     Meal supper;
-    QLabel* sumLabel;
+    QLabel* sumLabelBreakfast;
+    QLabel* sumLabelLunch;
+    QLabel* sumLabelDinner;
+    QLabel* sumLabelSnack;
+    QLabel* sumLabelSupper;
 };
