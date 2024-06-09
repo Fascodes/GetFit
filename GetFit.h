@@ -8,7 +8,7 @@
 #include "Fooddata.h"
 #include "Foods.h"
 #include "Meal.h"
-#include "EditMealDialog.h"
+#include "DialogBoxes.h"
 #include "Day.h"
 
 class GetFit : public QMainWindow
@@ -22,6 +22,7 @@ public:
 private slots:
     void addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBox* comboBox, QLineEdit* lineEdit);
     void removeMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel);
+    void addNewFood();
 
 private:
     Ui::GetFitClass ui;
@@ -29,6 +30,7 @@ private:
     void updateSumLabel(Meal* meal, QLabel* sumLabel);
     void updateDayLabel();
 
+    Foods foods;
     Day day;
     QLabel* sumLabelBreakfast;
     QLabel* sumLabelLunch;

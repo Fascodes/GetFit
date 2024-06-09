@@ -1,16 +1,17 @@
 #include "Foods.h"
 #include <fstream>
+#include <stdexcept>
 
-void Foods::readFood(std::ifstream& inputFile)
-{
+void Foods::readFood(const std::string& fileName) {
+    std::ifstream inputFile(fileName);
     if (!inputFile) {
         std::cerr << "Error opening file." << std::endl;
         inputFile.close();
         return;
     }
     FoodData temp;
-    while (inputFile >> temp.name >> temp.caloriesPer100g >> temp.proteinPer100g >> temp.carbsPer100g >> temp.fatPer100g)
-    {
+    this->food_vector.clear();
+    while (inputFile >> temp.name >> temp.caloriesPer100g >> temp.proteinPer100g >> temp.carbsPer100g >> temp.fatPer100g) {
         this->food_vector.push_back(temp);
     };
     this->sortFoodByName();
@@ -22,12 +23,10 @@ const std::vector<FoodData>& Foods::getFood() const {
 }
 
 const FoodData& Foods::getFoodIndex(size_t index) const {
-    if (index < food_vector.size()) {
-        return food_vector[index];
-    }
-    else {
+    if (index >= food_vector.size()) {
         throw std::out_of_range("Index out of range");
     }
+    return food_vector[index];
 }
 
 void Foods::sortFoodByName() {
@@ -41,12 +40,16 @@ std::ostream& operator<<(std::ostream& os, const FoodData& newFood) {
     return os;
 }
 
-void Foods::writeFood(FoodData newFood ,std::ofstream& outputFile)
-{
+void Foods::writeFood(const FoodData& newFood, const std::string& fileName) {
+    std::ofstream outputFile(fileName, std::ios::app);
     if (!outputFile) {
-        std::cerr << "Error opening file." << std::endl;
-        outputFile.close();
+        std::cerr << "Error opening file: " << fileName << std::endl;
         return;
     }
+
     outputFile << newFood << std::endl;
+}
+
+void Foods::addFood(const FoodData& newFood) {
+    food_vector.push_back(newFood);
 }

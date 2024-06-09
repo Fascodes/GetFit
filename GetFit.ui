@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>526</height>
+    <width>642</width>
+    <height>578</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -278,8 +278,8 @@ QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>65</width>
-             <height>18</height>
+             <width>604</width>
+             <height>68</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaBreakfast"/>
@@ -338,8 +338,8 @@ QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>604</width>
+             <height>68</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaLunch"/>
@@ -398,8 +398,8 @@ QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>604</width>
+             <height>68</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaDinner"/>
@@ -458,8 +458,8 @@ QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>604</width>
+             <height>68</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSnack"/>
@@ -518,7 +518,7 @@ QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>562</width>
+             <width>604</width>
              <height>68</height>
             </rect>
            </property>
@@ -544,6 +544,13 @@ QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {
       </property>
      </widget>
     </item>
+    <item alignment="Qt::AlignRight">
+     <widget class="QPushButton" name="addNewFoodButton">
+      <property name="text">
+       <string>Add a food type</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -551,7 +558,7 @@ QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>642</width>
      <height>26</height>
     </rect>
    </property>

@@ -93,7 +93,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Day.cpp" />
-    <ClCompile Include="EditMealDialog.cpp" />
+    <ClCompile Include="DialogBoxes.cpp" />
     <ClCompile Include="Meal.cpp" />
     <QtRcc Include="GetFit.qrc" />
     <QtUic Include="GetFit.ui" />
@@ -103,7 +103,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="EditMealDialog.h" />
+    <QtMoc Include="DialogBoxes.h" />
     <ClInclude Include="Day.h" />
     <ClInclude Include="Fooddata.h" />
     <ClInclude Include="Foods.h" />

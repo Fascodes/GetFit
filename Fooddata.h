@@ -1,13 +1,14 @@
-#pragma once
+#ifndef FOODDATA_H
+#define FOODDATA_H
 
 #include <iostream>
 
 struct FoodData{
     std::string name;
-    int caloriesPer100g;
-    double proteinPer100g;
-    double carbsPer100g;
-    double fatPer100g;
+    int caloriesPer100g{};
+    double proteinPer100g{};
+    double carbsPer100g{};
+    double fatPer100g{};
 
     bool operator==(const FoodData& other) const {
         return (
@@ -17,3 +18,5 @@ struct FoodData{
             fatPer100g == other.fatPer100g);
     };
 };
+
+#endif

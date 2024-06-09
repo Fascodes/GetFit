@@ -22,14 +22,13 @@ void Meal::sumFood() {
         carbs += (food.carbsPer100g * grams) / 100;
         fat += (food.fatPer100g * grams) / 100;
     }
+
+    this->protein = std::round(this->protein * 100) / 100.0;
+    this->carbs = std::round(this->carbs * 100) / 100.0;
+    this->fat = std::round(this->fat * 100) / 100.0;
 }
 
-
-
-
-
-void Meal::editFood(const FoodData& food, const int grams, const int newGrams)
-{
+void Meal::editFood(const FoodData& food, const int grams, const int newGrams) {
     for (auto& item : mealFoods) {
         if (std::get<0>(item) == food) {
             std::get<1>(item) = newGrams;
@@ -49,8 +48,6 @@ void Meal::removeFood(const FoodData& other, const int otherGrams) {
     }
 }
 
-
-
 bool Meal::foodExists(const std::string& name) const {
     return std::any_of(mealFoods.begin(), mealFoods.end(), [&name](const std::tuple<FoodData, int>& item) {
         return std::get<0>(item).name == name;
@@ -58,45 +55,23 @@ bool Meal::foodExists(const std::string& name) const {
 }
 
 void Meal::clear() {
-    mealFoods.clear(); // Clear all food items from the vector
+    mealFoods.clear();
+    sumFood();
 }
 
-size_t Meal::getSize()
-{
+size_t Meal::getSize() const {
     return mealFoods.size();
 };
 
-
-int Meal::getCalories() const
-{
+int Meal::getCalories() const {
     return this->calories;
 };
-double Meal::getProtein() const
-{
+double Meal::getProtein() const {
     return this->protein;
 };
-double Meal::getCarbs() const
-{
+double Meal::getCarbs() const {
     return this->carbs;
 };
-double Meal::getFat() const
-{
+double Meal::getFat() const {
     return this->fat;
 };
-
-std::ostream& operator<<(std::ostream& os, const Meal& meal) {
-    for (const auto& item : meal.mealFoods) {
-        const FoodData& food = std::get<0>(item);
-        int grams = std::get<1>(item);
-        os << food.name << ": " << grams << " grams, "
-            << "Calories: " << (food.caloriesPer100g * grams) / 100 << ", "
-            << "Protein: " << (food.proteinPer100g * grams) / 100 << "g, "
-            << "Carbs: " << (food.carbsPer100g * grams) / 100 << "g, "
-            << "Fat: " << (food.fatPer100g * grams) / 100 << "g\n";
-    }
-    os << "Total: " << meal.calories << " Calories, "
-        << meal.protein << "g Protein, "
-        << meal.carbs << "g Carbs, "
-        << meal.fat << "g Fat\n";
-    return os;
-}
