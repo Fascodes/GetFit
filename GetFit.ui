@@ -351,6 +351,13 @@
       </widget>
      </widget>
     </item>
+    <item>
+     <widget class="QLabel" name="sumLabelDay">
+      <property name="text">
+       <string>Day Total: 0 Calories, 0g Protein, 0g Carbs, 0g Fat</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">

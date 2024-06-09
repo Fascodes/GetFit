@@ -25,17 +25,23 @@ private slots:
 private:
     Ui::GetFitClass ui;
     void populateComboBox(QComboBox* comboBox);
-
+    void sumMacros();
     void updateSumLabel(Meal* meal, QLabel* sumLabel);
+    void updateDayLabel();
 
     Meal breakfast;
     Meal lunch;
     Meal dinner;
     Meal snack;
     Meal supper;
+    int calories;
+    double protein;
+    double carbs;
+    double fat;
     QLabel* sumLabelBreakfast;
     QLabel* sumLabelLunch;
     QLabel* sumLabelDinner;
     QLabel* sumLabelSnack;
     QLabel* sumLabelSupper;
+    QLabel* sumLabelDay;
 };
