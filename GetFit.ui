@@ -47,7 +47,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="breakfastView">
        <layout class="QVBoxLayout" name="verticalLayoutBreakfastView">
@@ -93,7 +93,7 @@
              <x>0</x>
              <y>0</y>
              <width>562</width>
-             <height>108</height>
+             <height>86</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaBreakfast"/>
@@ -152,8 +152,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>562</width>
-             <height>108</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaLunch"/>
@@ -212,8 +212,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>562</width>
-             <height>108</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaDinner"/>
@@ -272,8 +272,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>562</width>
-             <height>108</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSnack"/>
@@ -333,7 +333,7 @@
              <x>0</x>
              <y>0</y>
              <width>562</width>
-             <height>108</height>
+             <height>86</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSupper"/>

@@ -18,7 +18,6 @@ public:
     void sumFood();
     void editFood(const FoodData& food, const int grams, const int newGrams);
     void removeFood(const FoodData& other, const int otherGrams);
-    void displayMeal() const;
     int getCalories() const;
     double getProtein() const;
     double getCarbs() const;
@@ -26,26 +25,7 @@ public:
     void clear();
     size_t getSize();
     bool foodExists(const std::string& name) const;
+    friend std::ostream& operator<<(std::ostream& os, const Meal& meal);
 };
 
-
-//class Day
-//{
-//private:
-//    std::vector<Meal> day_food;
-//    int date;
-//    int calories;
-//    double protein;
-//    double carbs;
-//    double fat;
-//public:
-//    Day() {};
-//    int getCalories() const;
-//    double getProtein() const;
-//    double getCarbs() const;
-//    double getFat() const;
-//    void setCalories();
-//    void setProtein();
-//    void setCarbs();
-//    void setFat();
-//};
+std::ostream& operator<<(std::ostream& os, const Meal& meal);
