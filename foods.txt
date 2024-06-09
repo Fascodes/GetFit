@@ -117,3 +117,8 @@ yellowPepper 27 1 6 0.3
 zucchini 17 1.2 3.1 0.3
 aga 12 12 12 12
 Marcinafijsfjaisfisafasijfasjfmasfsafas 1 1 1 1
+aa 12 12 12 12
+asc 1 2 3 4
+abccdefgh 12 12 12 12
+asd 12 12 12 12
+!!!!!! 12 12 1212 12

@@ -34,18 +34,36 @@ GetFit::GetFit(QWidget* parent)
     populateComboBox(ui.comboBoxSupper);
 
     // Connect the add meal buttons
-    connect(ui.addButtonBreakfast, &QPushButton::clicked, [this]() { addMeal(&day.getMeal(Day::Breakfast), ui.verticalLayoutScrollAreaBreakfast, sumLabelBreakfast, ui.comboBoxBreakfast, ui.lineEditGramsBreakfast); });
-    connect(ui.addButtonLunch, &QPushButton::clicked, [this]() { addMeal(&day.getMeal(Day::Lunch), ui.verticalLayoutScrollAreaLunch, sumLabelLunch, ui.comboBoxLunch, ui.lineEditGramsLunch); });
-    connect(ui.addButtonDinner, &QPushButton::clicked, [this]() { addMeal(&day.getMeal(Day::Dinner), ui.verticalLayoutScrollAreaDinner, sumLabelDinner, ui.comboBoxDinner, ui.lineEditGramsDinner); });
-    connect(ui.addButtonSnack, &QPushButton::clicked, [this]() { addMeal(&day.getMeal(Day::Snack), ui.verticalLayoutScrollAreaSnack, sumLabelSnack, ui.comboBoxSnack, ui.lineEditGramsSnack); });
-    connect(ui.addButtonSupper, &QPushButton::clicked, [this]() { addMeal(&day.getMeal(Day::Supper), ui.verticalLayoutScrollAreaSupper, sumLabelSupper, ui.comboBoxSupper, ui.lineEditGramsSupper); });
+    connect(ui.addButtonBreakfast, &QPushButton::clicked, [this]() {
+        addMeal(&day.getMeal(Day::Breakfast), ui.verticalLayoutScrollAreaBreakfast, sumLabelBreakfast, ui.comboBoxBreakfast, ui.lineEditGramsBreakfast); });
+
+    connect(ui.addButtonLunch, &QPushButton::clicked, [this]() {
+        addMeal(&day.getMeal(Day::Lunch), ui.verticalLayoutScrollAreaLunch, sumLabelLunch, ui.comboBoxLunch, ui.lineEditGramsLunch); });
+
+    connect(ui.addButtonDinner, &QPushButton::clicked, [this]() {
+        addMeal(&day.getMeal(Day::Dinner), ui.verticalLayoutScrollAreaDinner, sumLabelDinner, ui.comboBoxDinner, ui.lineEditGramsDinner); });
+
+    connect(ui.addButtonSnack, &QPushButton::clicked, [this]() {
+        addMeal(&day.getMeal(Day::Snack), ui.verticalLayoutScrollAreaSnack, sumLabelSnack, ui.comboBoxSnack, ui.lineEditGramsSnack); });
+
+    connect(ui.addButtonSupper, &QPushButton::clicked, [this]() {
+        addMeal(&day.getMeal(Day::Supper), ui.verticalLayoutScrollAreaSupper, sumLabelSupper, ui.comboBoxSupper, ui.lineEditGramsSupper); });
 
     // Connect the remove all meal buttons
-    connect(ui.removeAllBreakfast, &QPushButton::clicked, [this]() { removeMeal(&day.getMeal(Day::Breakfast), ui.verticalLayoutScrollAreaBreakfast, sumLabelBreakfast); });
-    connect(ui.removeAllLunch, &QPushButton::clicked, [this]() { removeMeal(&day.getMeal(Day::Lunch), ui.verticalLayoutScrollAreaLunch, sumLabelLunch); });
-    connect(ui.removeAllDinner, &QPushButton::clicked, [this]() { removeMeal(&day.getMeal(Day::Dinner), ui.verticalLayoutScrollAreaDinner, sumLabelDinner); });
-    connect(ui.removeAllSnack, &QPushButton::clicked, [this]() { removeMeal(&day.getMeal(Day::Snack), ui.verticalLayoutScrollAreaSnack, sumLabelSnack); });
-    connect(ui.removeAllSupper, &QPushButton::clicked, [this]() { removeMeal(&day.getMeal(Day::Supper), ui.verticalLayoutScrollAreaSupper, sumLabelSupper); });
+    connect(ui.removeAllBreakfast, &QPushButton::clicked, [this]() {
+        removeMeal(&day.getMeal(Day::Breakfast), ui.verticalLayoutScrollAreaBreakfast, sumLabelBreakfast); });
+
+    connect(ui.removeAllLunch, &QPushButton::clicked, [this]() {
+        removeMeal(&day.getMeal(Day::Lunch), ui.verticalLayoutScrollAreaLunch, sumLabelLunch); });
+
+    connect(ui.removeAllDinner, &QPushButton::clicked, [this]() {
+        removeMeal(&day.getMeal(Day::Dinner), ui.verticalLayoutScrollAreaDinner, sumLabelDinner); });
+
+    connect(ui.removeAllSnack, &QPushButton::clicked, [this]() {
+        removeMeal(&day.getMeal(Day::Snack), ui.verticalLayoutScrollAreaSnack, sumLabelSnack); });
+
+    connect(ui.removeAllSupper, &QPushButton::clicked, [this]() {
+        removeMeal(&day.getMeal(Day::Supper), ui.verticalLayoutScrollAreaSupper, sumLabelSupper); });
 
     // Connect the button for adding new Food
     connect(ui.addNewFoodButton, &QPushButton::clicked, this, &GetFit::addNewFood);
@@ -59,7 +77,8 @@ GetFit::~GetFit()
 
 void GetFit::populateComboBox(QComboBox* comboBox)
 {
-    
+    comboBox->clear();
+
     foods.readFood("foods.txt");
     if (foods.getFood().empty()) {
         QMessageBox::warning(this, "Error: Reading File", "Check the foods.txt file");
@@ -69,7 +88,12 @@ void GetFit::populateComboBox(QComboBox* comboBox)
 
     for (const auto& food : foods.getFood())
     {
-        QString itemText = QString("%1 - %2 calories %3 protein %4 carbs %5 fat / 100g").arg(QString::fromStdString(food.name)).arg(food.caloriesPer100g).arg(food.proteinPer100g).arg(food.carbsPer100g).arg(food.fatPer100g);
+        QString itemText = QString("%1 - %2 calories %3 protein %4 carbs %5 fat / 100g")
+            .arg(QString::fromStdString(food.name))
+            .arg(food.caloriesPer100g)
+            .arg(food.proteinPer100g)
+            .arg(food.carbsPer100g)
+            .arg(food.fatPer100g);
         FoodData foodData = { food.name, food.caloriesPer100g, food.proteinPer100g, food.carbsPer100g, food.fatPer100g };
         comboBox->addItem(itemText, QVariant::fromValue(foodData));
     }
@@ -215,7 +239,6 @@ void GetFit::addNewFood()
         newFood.fatPer100g = newFoodDialog.getFat();
 
         // Add the new food to the Foods list
-        foods.addFood(newFood);
         foods.writeFood(newFood, "foods.txt");
 
         // Update all comboBoxes

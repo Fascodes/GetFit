@@ -8,12 +8,12 @@ class Meal
 {
 private:
     std::vector<std::tuple<FoodData, int>> mealFoods;
-    int calories;
+    int calories{};
     double protein;
     double carbs;
     double fat;
 public:
-    Meal() {};
+    Meal() : calories(0), protein(0.0), carbs(0.0), fat(0.0) {};
     void addFood(const FoodData food, int grams);
     void sumFood();
     void editFood(const FoodData& food, const int grams, const int newGrams);
@@ -27,5 +27,3 @@ public:
     bool foodExists(const std::string& name) const;
     friend std::ostream& operator<<(std::ostream& os, const Meal& meal);
 };
-
-std::ostream& operator<<(std::ostream& os, const Meal& meal);
