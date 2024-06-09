@@ -1,23 +1,24 @@
 #ifndef FOODS_H
-#define FOODS_G
+#define FOODS_H
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include "Fooddata.h"
+#include "FoodData.h"
 
-class Foods
-{
+class Foods {
 private:
     std::vector<FoodData> food_vector;
+
 public:
-    Foods() {};
+    Foods() = default;
+
     void readFood(const std::string& fileName);
     const std::vector<FoodData>& getFood() const;
     const FoodData& getFoodIndex(size_t index) const;
     void sortFoodByName();
-    void addFood(FoodData newFood);
-    void writeFood(FoodData newFood, const std::string& fileName);
+    void addFood(const FoodData& newFood);
+    void writeFood(const FoodData& newFood, const std::string& fileName);
 };
 
-#endif
+#endif // FOODS_H

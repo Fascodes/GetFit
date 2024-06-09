@@ -32,7 +32,7 @@ double Day::getCarbs() const {
 };
 
 double Day::getFat() const {
-	return this->carbs;
+	return this->fat;
 };
 
 void Day::sumMacros() {

@@ -35,7 +35,6 @@ void Meal::editFood(const FoodData& food, const int grams, const int newGrams) {
 }
 
 void Meal::removeFood(const FoodData& other, const int otherGrams) {
-
     for (auto it = mealFoods.begin(); it != mealFoods.end(); ++it) {
         if (std::get<0>(*it) == other) {
             mealFoods.erase(it);
@@ -52,10 +51,11 @@ bool Meal::foodExists(const std::string& name) const {
 }
 
 void Meal::clear() {
-    mealFoods.clear(); // Clear all food items from the vector
+    mealFoods.clear();
+    sumFood();
 }
 
-size_t Meal::getSize() {
+size_t Meal::getSize() const {
     return mealFoods.size();
 };
 
@@ -71,21 +71,3 @@ double Meal::getCarbs() const {
 double Meal::getFat() const {
     return this->fat;
 };
-
-std::ostream& operator<<(std::ostream& os, const Meal& meal) {
-
-    for (const auto& item : meal.mealFoods) {
-        const FoodData& food = std::get<0>(item);
-        int grams = std::get<1>(item);
-        os << food.name << ": " << grams << " grams, "
-            << "Calories: " << (food.caloriesPer100g * grams) / 100 << ", "
-            << "Protein: " << (food.proteinPer100g * grams) / 100 << "g, "
-            << "Carbs: " << (food.carbsPer100g * grams) / 100 << "g, "
-            << "Fat: " << (food.fatPer100g * grams) / 100 << "g\n";
-    }
-    os << "Total: " << meal.calories << " Calories, "
-        << meal.protein << "g Protein, "
-        << meal.carbs << "g Carbs, "
-        << meal.fat << "g Fat\n";
-    return os;
-}

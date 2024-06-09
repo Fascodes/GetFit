@@ -5,10 +5,10 @@
 
 struct FoodData{
     std::string name;
-    int caloriesPer100g;
-    double proteinPer100g;
-    double carbsPer100g;
-    double fatPer100g;
+    int caloriesPer100g{};
+    double proteinPer100g{};
+    double carbsPer100g{};
+    double fatPer100g{};
 
     bool operator==(const FoodData& other) const {
         return (

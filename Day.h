@@ -1,9 +1,10 @@
 #ifndef DAY_H
 #define DAY_H
 
-#include <vector>
 #include "Meal.h"
+#include <vector>
 #include <fstream>
+#include <stdexcept>  
 
 class Day
 {
@@ -21,7 +22,9 @@ private:
 
 public:
     Day() : calories(0), protein(0.0), carbs(0.0), fat(0.0) {};
+   
     enum MealType { Breakfast, Lunch, Dinner, Snack, Supper };
+    
     Meal& getMeal(MealType mealtype);
     int getCalories() const;
     double getProtein() const;

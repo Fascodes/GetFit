@@ -1,14 +1,17 @@
 #ifndef MEAL_H
 #define MEAL_H
+
 #include "Fooddata.h"
 #include <vector>
 #include <algorithm>
+#include <tuple>
+#include <ostream>
 
 class Meal
 {
 private:
     std::vector<std::tuple<FoodData, int>> mealFoods;
-    int calories{};
+    int calories;
     double protein;
     double carbs;
     double fat;
@@ -24,12 +27,11 @@ public:
     double getProtein() const;
     double getCarbs() const;
     double getFat() const;
-    size_t getSize();
+    size_t getSize() const;
 
     void clear();
     bool foodExists(const std::string& name) const;
 
-    friend std::ostream& operator<<(std::ostream& os, const Meal& meal);
 };
 
 #endif

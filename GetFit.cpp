@@ -18,7 +18,7 @@ GetFit::GetFit(QWidget* parent)
 
     ui.setupUi(this);
 
-    // Initialize the sum labels
+    
     sumLabelBreakfast = ui.sumLabelBreakfast;
     sumLabelLunch = ui.sumLabelLunch;
     sumLabelDinner = ui.sumLabelDinner;
@@ -26,14 +26,14 @@ GetFit::GetFit(QWidget* parent)
     sumLabelSupper = ui.sumLabelSupper;
     sumLabelDay = ui.sumLabelDay;
 
-    // Populate the comboBoxes with data
+    
     populateComboBox(ui.comboBoxBreakfast);
     populateComboBox(ui.comboBoxLunch);
     populateComboBox(ui.comboBoxDinner);
     populateComboBox(ui.comboBoxSnack);
     populateComboBox(ui.comboBoxSupper);
 
-    // Connect the add meal buttons
+    
     connect(ui.addButtonBreakfast, &QPushButton::clicked, [this]() {
         addMeal(&day.getMeal(Day::Breakfast), ui.verticalLayoutScrollAreaBreakfast, sumLabelBreakfast, ui.comboBoxBreakfast, ui.lineEditGramsBreakfast); });
 
@@ -49,7 +49,7 @@ GetFit::GetFit(QWidget* parent)
     connect(ui.addButtonSupper, &QPushButton::clicked, [this]() {
         addMeal(&day.getMeal(Day::Supper), ui.verticalLayoutScrollAreaSupper, sumLabelSupper, ui.comboBoxSupper, ui.lineEditGramsSupper); });
 
-    // Connect the remove all meal buttons
+    
     connect(ui.removeAllBreakfast, &QPushButton::clicked, [this]() {
         removeMeal(&day.getMeal(Day::Breakfast), ui.verticalLayoutScrollAreaBreakfast, sumLabelBreakfast); });
 
@@ -67,6 +67,7 @@ GetFit::GetFit(QWidget* parent)
 
     // Connect the button for adding new Food
     connect(ui.addNewFoodButton, &QPushButton::clicked, this, &GetFit::addNewFood);
+
     // Connect the comboBoxViewSelection to switch the stacked widget views
     connect(ui.comboBoxViewSelection, QOverload<int>::of(&QComboBox::currentIndexChanged),
         ui.stackedWidget, &QStackedWidget::setCurrentIndex);
@@ -118,6 +119,7 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
     double totalProtein = (foodData.proteinPer100g * grams) / 100;
     double totalCarbs = (foodData.carbsPer100g * grams) / 100;
     double totalFat = (foodData.fatPer100g * grams) / 100;
+    
     if (meal->foodExists(foodData.name)) {
         QMessageBox::warning(this, "Duplicate detected", "This food has already been added, edit to change the amount");
         return;
@@ -132,19 +134,19 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
         .arg(totalCarbs)
         .arg(totalFat);
 
-    // Create the container widget
+    
     QWidget* containerWidget = new QWidget();
     QHBoxLayout* hLayout = new QHBoxLayout(containerWidget);
     hLayout->setContentsMargins(0, 0, 0, 0);
 
-    // Create the label and buttons
+    
     QLabel* newLabel = new QLabel(mealText);
     QPushButton* removeButton = new QPushButton("Remove");
     QPushButton* editButton = new QPushButton("Edit");
 
     // Add label and buttons to the layout
     hLayout->addWidget(newLabel);
-    hLayout->addStretch();  // Add a stretch to push the buttons to the right
+    hLayout->addStretch();
     hLayout->addWidget(removeButton);
     hLayout->addWidget(editButton);
 
@@ -157,17 +159,17 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
         layout->removeWidget(containerWidget);
         containerWidget->deleteLater();
         updateSumLabel(meal, sumLabel);
-        });
+     });
 
     connect(editButton, &QPushButton::clicked, [this, containerWidget, meal, layout, sumLabel, foodData, grams, newLabel]() {
         EditMealDialog editDialog(QString::fromStdString(foodData.name), grams, this);
         if (editDialog.exec() == QDialog::Accepted) {
-            if (editDialog.getGrams() <= 0 || editDialog.getGrams() > 10000) {
+            int newGrams = editDialog.getGrams();
+            if (newGrams <= 0 || newGrams > 10000) {
                 QMessageBox::warning(this, "Invalid Input", "Please enter a valid number of grams.");
                 return;
             }
-            int newGrams = editDialog.getGrams();
-            meal->editFood(foodData, grams, newGrams); // Adjust the meal with new grams
+            meal->editFood(foodData, grams, newGrams);
             newLabel->setText(QString("%1 - %2 grams - %3 Calories - %4g Protein - %5g Carbs - %6g Fat")
                 .arg(QString::fromStdString(foodData.name))
                 .arg(newGrams)
@@ -178,13 +180,13 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
             meal->sumFood();
             updateSumLabel(meal, sumLabel);
         }
-        });
+     });
 
     updateSumLabel(meal, sumLabel);
 }
 
 void GetFit::removeMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel) {
-    // Clear the meal vector
+    
     meal->clear();
 
     // Remove all widgets from the layout
@@ -194,7 +196,7 @@ void GetFit::removeMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel) {
         delete item;
     }
     meal->sumFood();
-    // Update the sum label to reflect the cleared meal
+
     updateSumLabel(meal, sumLabel);
 }
 
@@ -214,14 +216,13 @@ void GetFit::updateDayLabel() {
     QString daySumText = QString("Day Total: %1 Calories, %2g Protein, %3g Carbs, %4g Fat")
         .arg(this->day.getCalories())
         .arg(this->day.getProtein())
-        .arg(this->day.getCalories())
+        .arg(this->day.getCarbs())
         .arg(this->day.getFat());
 
     sumLabelDay->setText(daySumText);
 };
 
 void GetFit::addNewFood() {
-
     NewFoodDialog newFoodDialog(this);
     if (newFoodDialog.exec() == QDialog::Accepted) {
         FoodData newFood;
@@ -231,10 +232,9 @@ void GetFit::addNewFood() {
         newFood.carbsPer100g = newFoodDialog.getCarbs();
         newFood.fatPer100g = newFoodDialog.getFat();
 
-        // Add the new food to the Foods list
+        
         foods.writeFood(newFood, "foods.txt");
 
-        // Update all comboBoxes
         populateComboBox(ui.comboBoxBreakfast);
         populateComboBox(ui.comboBoxLunch);
         populateComboBox(ui.comboBoxDinner);

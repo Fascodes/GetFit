@@ -1,31 +1,5 @@
 #include "DialogBoxes.h"
 
-EditMealDialog::EditMealDialog(const QString& foodName, int grams, QWidget* parent)
-    : QDialog(parent), grams(grams)
-{
-    QVBoxLayout* layout = new QVBoxLayout(this);
-
-    QLabel* label = new QLabel(QString("Edit grams for %1").arg(foodName));
-    layout->addWidget(label);
-
-    lineEditGrams = new QLineEdit();
-    layout->addWidget(lineEditGrams);
-
-    QPushButton* buttonOk = new QPushButton("OK");
-    layout->addWidget(buttonOk);
-
-    connect(buttonOk, &QPushButton::clicked, this, &EditMealDialog::accept);
-}
-
-int EditMealDialog::getGrams() const {
-    return lineEditGrams->text().toInt();
-}
-
-void EditMealDialog::accept() {
-    grams = lineEditGrams->text().toInt();
-    QDialog::accept();
-}
-
 NewFoodDialog::NewFoodDialog(QWidget* parent)
     : QDialog(parent)
 {
@@ -98,9 +72,40 @@ double NewFoodDialog::getFat() const {
 }
 
 void NewFoodDialog::onAddButtonClicked() {
-    if (getName().isEmpty() || getCalories() <= 0 || getProtein() <= 0 || getCarbs() <= 0 || getFat() <= 0) {
+    if (getName().isEmpty() ||
+        getCalories() <= 0 ||
+        getProtein() < 0 || getProtein() > 100 ||
+        getCarbs() < 0 || getCarbs() > 100 ||
+        getFat() < 0 || getFat() > 100)
+    {
         QMessageBox::warning(this, "Invalid Input", "Please provide valid values for all fields.");
         return;
     }
     accept();
+}
+
+EditMealDialog::EditMealDialog(const QString& foodName, int grams, QWidget* parent)
+    : QDialog(parent), grams(grams)
+{
+    QVBoxLayout* layout = new QVBoxLayout(this);
+
+    QLabel* label = new QLabel(QString("Edit grams for %1").arg(foodName));
+    layout->addWidget(label);
+
+    lineEditGrams = new QLineEdit();
+    layout->addWidget(lineEditGrams);
+
+    QPushButton* buttonOk = new QPushButton("OK");
+    layout->addWidget(buttonOk);
+
+    connect(buttonOk, &QPushButton::clicked, this, &EditMealDialog::accept);
+}
+
+int EditMealDialog::getGrams() const {
+    return lineEditGrams->text().toInt();
+}
+
+void EditMealDialog::accept() {
+    grams = lineEditGrams->text().toInt();
+    QDialog::accept();
 }
