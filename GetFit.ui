@@ -7,11 +7,197 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>400</height>
+    <height>526</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>GetFit</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background-color: #2c2c2c;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+QComboBox {
+    background-color: #3a3a3a;
+    border: 1px solid #555555;
+    padding: 5px;
+    color: #ffffff;
+    min-width: 120px;
+}
+
+QComboBox::drop-down {
+    width: 20px;
+    border-left: 1px solid #555555;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #3a3a3a;
+    border: 1px solid #555555;
+    selection-background-color: #555555;
+    color: #ffffff;
+}
+
+QLabel {
+    color: #ffffff;
+    padding: 5px;
+}
+
+QLineEdit {
+    background-color: #3a3a3a;
+    border: 1px solid #555555;
+    padding: 5px;
+    color: #ffffff;
+}
+
+QPushButton {
+    background-color: #555555;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+QPushButton:hover {
+    background-color: #777777;
+}
+
+QPushButton:pressed {
+    background-color: #999999;
+}
+
+QPushButton#removeAllBreakfast, QPushButton#removeAllLunch, QPushButton#removeAllDinner, QPushButton#removeAllSnack, QPushButton#removeAllSupper {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+
+QPushButton#removeAllBreakfast:hover, QPushButton#removeAllLunch:hover, QPushButton#removeAllDinner:hover, QPushButton#removeAllSnack:hover, QPushButton#removeAllSupper:hover {
+    background-color: #e60000;
+}
+
+QPushButton#removeAllBreakfast:pressed, QPushButton#removeAllLunch:pressed, QPushButton#removeAllDinner:pressed, QPushButton#removeAllSnack:pressed, QPushButton#removeAllSupper:pressed {
+    background-color: #b30000;
+}
+
+QScrollArea {
+    border: 1px solid #555555;
+    background-color: #3a3a3a;
+}
+
+QScrollArea QWidget {
+    background-color: #3a3a3a;
+}
+
+QStatusBar {
+    background-color: #555555;
+    color: #ffffff;
+    padding: 5px;
+}
+
+QToolBar {
+    background-color: #555555;
+    border: none;
+    padding: 5px;
+}
+
+QToolBar QToolButton {
+    background-color: #777777;
+    border: 1px solid #555555;
+    padding: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+QToolBar QToolButton:hover {
+    background-color: #999999;
+}
+
+QMenuBar {
+    background-color: #555555;
+    color: #ffffff;
+}
+
+QMenuBar::item {
+    background-color: #555555;
+    color: #ffffff;
+    padding: 5px 10px;
+}
+
+QMenuBar::item:selected {
+    background-color: #777777;
+}
+
+QMenu {
+    background-color: #3a3a3a;
+    border: 1px solid #555555;
+    color: #ffffff;
+}
+
+QMenu::item {
+    padding: 5px 10px;
+    color: #ffffff;
+}
+
+QMenu::item:selected {
+    background-color: #777777;
+    color: #ffffff;
+}
+
+QVBoxLayout {
+    padding: 10px;
+}
+
+QLabel#sumLabelDay, QLabel#sumLabelBreakfast, QLabel#sumLabelLunch, QLabel#sumLabelDinner, QLabel#sumLabelSnack, QLabel#sumLabelSupper {
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: right;
+    color: #ffffff;
+}
+
+QComboBox#comboBoxViewSelection {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+QComboBox#comboBoxBreakfast, QComboBox#comboBoxLunch, QComboBox#comboBoxDinner, QComboBox#comboBoxSnack, QComboBox#comboBoxSupper {
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+QPushButton#addButtonBreakfast, QPushButton#addButtonLunch, QPushButton#addButtonDinner, QPushButton#addButtonSnack, QPushButton#addButtonSupper {
+    margin-bottom: 10px;
+}
+
+QMessageBox, QDialog {
+    background-color: #3a3a3a;
+    color: #ffffff;
+    border: 1px solid #555555;
+}
+
+QMessageBox QLabel, QDialog QLabel {
+    color: #ffffff;
+}
+
+QMessageBox QPushButton, QDialog QPushButton {
+    background-color: #555555;
+    color: #ffffff;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+QMessageBox QPushButton:hover, QDialog QPushButton:hover {
+    background-color: #777777;
+}
+
+QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {
+    background-color: #999999;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -92,8 +278,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>562</width>
-             <height>86</height>
+             <width>65</width>
+             <height>18</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaBreakfast"/>
@@ -333,7 +519,7 @@
              <x>0</x>
              <y>0</y>
              <width>562</width>
-             <height>86</height>
+             <height>68</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutScrollAreaSupper"/>
@@ -366,7 +552,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
