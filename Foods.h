@@ -5,6 +5,9 @@
 #include <vector>
 #include <algorithm>
 #include "FoodData.h"
+#include <fstream>
+#include <stdexcept>
+#include <sstream>
 
 class Foods {
 private:

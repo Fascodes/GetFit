@@ -40,9 +40,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditMealDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Meal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -52,7 +49,7 @@
     <ClCompile Include="Day.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NewFoodDialog.cpp">
+    <ClCompile Include="DialogBoxes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,11 +68,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="EditMealDialog.h">
+    <QtMoc Include="DialogBoxes.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="NewFoodDialog.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="foods.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -1,6 +1,4 @@
 #include "Foods.h"
-#include <fstream>
-#include <stdexcept>
 
 void Foods::readFood(const std::string& fileName) {
     std::ifstream inputFile(fileName);
