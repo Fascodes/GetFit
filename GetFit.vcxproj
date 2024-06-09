@@ -93,15 +93,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Day.cpp" />
-    <ClCompile Include="EditMealDialog.cpp" />
+    <ClCompile Include="DialogBoxes.cpp" />
     <ClCompile Include="Meal.cpp" />
-    <ClCompile Include="NewFoodDialog.cpp" />
-    <QtMoc Include="NewFoodDialog.h">
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
-    </QtMoc>
     <QtRcc Include="GetFit.qrc" />
     <QtUic Include="GetFit.ui" />
     <QtMoc Include="GetFit.h" />
@@ -110,7 +103,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="EditMealDialog.h" />
+    <QtMoc Include="DialogBoxes.h" />
     <ClInclude Include="Day.h" />
     <ClInclude Include="Fooddata.h" />
     <ClInclude Include="Foods.h" />

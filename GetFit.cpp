@@ -48,7 +48,7 @@ GetFit::GetFit(QWidget* parent)
     connect(ui.removeAllSupper, &QPushButton::clicked, [this]() { removeMeal(&day.getMeal(Day::Supper), ui.verticalLayoutScrollAreaSupper, sumLabelSupper); });
 
     // Connect the button for adding new Food
-    connect(ui.addNewFoodButton, &QPushButton::clicked, [this]() { addNewFood(&foods, ui.addNewFoodButton); });
+    connect(ui.addNewFoodButton, &QPushButton::clicked, this, &GetFit::addNewFood);
     // Connect the comboBoxViewSelection to switch the stacked widget views
     connect(ui.comboBoxViewSelection, QOverload<int>::of(&QComboBox::currentIndexChanged),
         ui.stackedWidget, &QStackedWidget::setCurrentIndex);
@@ -203,17 +203,26 @@ void GetFit::updateDayLabel()
     sumLabelDay->setText(daySumText);
 };
 
-void GetFit::addNewFood(Foods* Foodlist, QPushButton* button)
+void GetFit::addNewFood()
 {
-    NewFoodDialog newfoodDialog(this);
-    if (newfoodDialog.exec() == QDialog::Accepted) {
-        if (newfoodDialog.getName().empty() || newfoodDialog.getCalories() <= 0 || newfoodDialog.getCalories() > 100 ||
-            newfoodDialog.getProtein() <= 0 || newfoodDialog.getProtein() > 100 || newfoodDialog.getCarbs() <= 0 ||
-            newfoodDialog.getCarbs() > 100 || newfoodDialog.getFat() <= 0 || newfoodDialog.getFat() > 100) {
-            QMessageBox::warning(this, "Invalid Input", "Please provide correct values.");
-            return;
-        }
-        Foodlist->addFood({ newfoodDialog.getName(), newfoodDialog.getCalories(), newfoodDialog.getProtein(),
-                           newfoodDialog.getCarbs(), newfoodDialog.getFat() });
+    NewFoodDialog newFoodDialog(this);
+    if (newFoodDialog.exec() == QDialog::Accepted) {
+        FoodData newFood;
+        newFood.name = newFoodDialog.getName().toStdString();
+        newFood.caloriesPer100g = newFoodDialog.getCalories();
+        newFood.proteinPer100g = newFoodDialog.getProtein();
+        newFood.carbsPer100g = newFoodDialog.getCarbs();
+        newFood.fatPer100g = newFoodDialog.getFat();
+
+        // Add the new food to the Foods list
+        foods.addFood(newFood);
+        foods.writeFood(newFood, "foods.txt");
+
+        // Update all comboBoxes
+        populateComboBox(ui.comboBoxBreakfast);
+        populateComboBox(ui.comboBoxLunch);
+        populateComboBox(ui.comboBoxDinner);
+        populateComboBox(ui.comboBoxSnack);
+        populateComboBox(ui.comboBoxSupper);
     }
 }

@@ -26,6 +26,4 @@ public:
     double getCarbs() const;
     double getFat() const;
     void sumMacros();
-    void saveToFile(std::ofstream& outputFile);
-    void readfromFile(std::ofstream& outputFile);
 };

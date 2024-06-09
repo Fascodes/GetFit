@@ -115,3 +115,5 @@ wheat 327 12.6 71.2 2.5
 yam 118 1.5 28 0.2
 yellowPepper 27 1 6 0.3
 zucchini 17 1.2 3.1 0.3
+aga 12 12 12 12
+Marcinafijsfjaisfisafasijfasjfmasfsafas 1 1 1 1
