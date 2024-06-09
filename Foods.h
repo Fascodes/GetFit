@@ -21,4 +21,4 @@ public:
     void writeFood(const FoodData& newFood, const std::string& fileName);
 };
 
-#endif // FOODS_H
+#endif 

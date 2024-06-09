@@ -5,19 +5,18 @@
 void Foods::readFood(const std::string& fileName) {
     std::ifstream inputFile(fileName);
     if (!inputFile) {
-        std::cerr << "Error opening file: " << fileName << std::endl;
+        std::cerr << "Error opening file." << std::endl;
+        inputFile.close();
         return;
     }
-
     FoodData temp;
-    food_vector.clear();
-
+    this->food_vector.clear();
     while (inputFile >> temp.name >> temp.caloriesPer100g >> temp.proteinPer100g >> temp.carbsPer100g >> temp.fatPer100g) {
-        food_vector.push_back(temp);
-    }
-
-    sortFoodByName();
-}
+        this->food_vector.push_back(temp);
+    };
+    this->sortFoodByName();
+    inputFile.close();
+};
 
 const std::vector<FoodData>& Foods::getFood() const {
     return food_vector;

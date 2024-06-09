@@ -40,4 +40,8 @@ void Day::sumMacros() {
 	this->protein = this->breakfast.getProtein() + this->lunch.getProtein() + this->dinner.getProtein() + this->snack.getProtein() + this->supper.getProtein();
 	this->carbs = this->breakfast.getCarbs() + this->lunch.getCarbs() + this->dinner.getCarbs() + this->snack.getCarbs() + this->supper.getCarbs();
 	this->fat = this->breakfast.getFat() + this->lunch.getFat() + this->dinner.getFat() + this->snack.getFat() + this->supper.getFat();
+
+    this->protein = std::round(this->protein * 100) / 100.0;
+    this->carbs = std::round(this->carbs * 100) / 100.0;
+    this->fat = std::round(this->fat * 100) / 100.0;
 };

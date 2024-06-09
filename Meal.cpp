@@ -22,6 +22,10 @@ void Meal::sumFood() {
         carbs += (food.carbsPer100g * grams) / 100;
         fat += (food.fatPer100g * grams) / 100;
     }
+
+    this->protein = std::round(this->protein * 100) / 100.0;
+    this->carbs = std::round(this->carbs * 100) / 100.0;
+    this->fat = std::round(this->fat * 100) / 100.0;
 }
 
 void Meal::editFood(const FoodData& food, const int grams, const int newGrams) {

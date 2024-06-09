@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <tuple>
 #include <ostream>
+#include <cmath>
 
 class Meal
 {

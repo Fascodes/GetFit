@@ -177,7 +177,6 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
                 .arg((foodData.proteinPer100g * newGrams) / 100)
                 .arg((foodData.carbsPer100g * newGrams) / 100)
                 .arg((foodData.fatPer100g * newGrams) / 100));
-            meal->sumFood();
             updateSumLabel(meal, sumLabel);
         }
      });
@@ -201,6 +200,7 @@ void GetFit::removeMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel) {
 }
 
 void GetFit::updateSumLabel(Meal* meal, QLabel* sumLabel) {
+    meal->sumFood();
     QString sumText = QString("Total: %1 Calories, %2g Protein, %3g Carbs, %4g Fat")
         .arg(meal->getCalories())
         .arg(meal->getProtein())
