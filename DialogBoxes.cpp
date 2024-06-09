@@ -6,7 +6,7 @@ NewFoodDialog::NewFoodDialog(QWidget* parent)
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
     QHBoxLayout* nameLayout = new QHBoxLayout();
-    QLabel* nameLabel = new QLabel("Name:", this);
+    QLabel* nameLabel = new QLabel("Name (Words separated with _ ):", this);
     nameLineEdit = new QLineEdit(this);
     nameLayout->addWidget(nameLabel);
     nameLayout->addWidget(nameLineEdit);
