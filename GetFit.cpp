@@ -95,6 +95,10 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
     double totalProtein = (foodData.proteinPer100g * grams) / 100;
     double totalCarbs = (foodData.carbsPer100g * grams) / 100;
     double totalFat = (foodData.fatPer100g * grams) / 100;
+    if (meal->foodExists(foodData.name)) {
+        QMessageBox::warning(this, "Duplicate detected", "This food has already been added, edit to change the amount");
+        return;
+    };
     meal->addFood(foodData, grams);
 
     QString mealText = QString("%1 - %2 grams - %3 Calories - %4g Protein - %5g Carbs - %6g Fat")

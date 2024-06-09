@@ -2,6 +2,7 @@
 
 #include "Fooddata.h"
 #include <vector>
+#include <algorithm>
 
 class Meal
 {
@@ -24,6 +25,7 @@ public:
     double getFat() const;
     void clear();
     size_t getSize();
+    bool foodExists(const std::string& name) const;
 };
 
 

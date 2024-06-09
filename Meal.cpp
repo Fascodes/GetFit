@@ -72,6 +72,12 @@ void Meal::displayMeal() const {
     std::cout << "Total Fat: " << fat << " g\n";
 }
 
+bool Meal::foodExists(const std::string& name) const {
+    return std::any_of(mealFoods.begin(), mealFoods.end(), [&name](const std::tuple<FoodData, int>& item) {
+        return std::get<0>(item).name == name;
+        });
+}
+
 void Meal::clear() {
     mealFoods.clear(); // Clear all food items from the vector
 }
