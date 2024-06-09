@@ -17,13 +17,11 @@ EditMealDialog::EditMealDialog(const QString& foodName, int grams, QWidget* pare
     connect(buttonOk, &QPushButton::clicked, this, &EditMealDialog::accept);
 }
 
-int EditMealDialog::getGrams() const
-{
+int EditMealDialog::getGrams() const {
     return lineEditGrams->text().toInt();
 }
 
-void EditMealDialog::accept()
-{
+void EditMealDialog::accept() {
     grams = lineEditGrams->text().toInt();
     QDialog::accept();
 }
@@ -79,33 +77,27 @@ NewFoodDialog::NewFoodDialog(QWidget* parent)
     connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
 }
 
-QString NewFoodDialog::getName() const
-{
+QString NewFoodDialog::getName() const {
     return nameLineEdit->text();
 }
 
-int NewFoodDialog::getCalories() const
-{
+int NewFoodDialog::getCalories() const {
     return caloriesLineEdit->text().toInt();
 }
 
-double NewFoodDialog::getProtein() const
-{
+double NewFoodDialog::getProtein() const {
     return proteinLineEdit->text().toDouble();
 }
 
-double NewFoodDialog::getCarbs() const
-{
+double NewFoodDialog::getCarbs() const {
     return carbsLineEdit->text().toDouble();
 }
 
-double NewFoodDialog::getFat() const
-{
+double NewFoodDialog::getFat() const {
     return fatLineEdit->text().toDouble();
 }
 
-void NewFoodDialog::onAddButtonClicked()
-{
+void NewFoodDialog::onAddButtonClicked() {
     if (getName().isEmpty() || getCalories() <= 0 || getProtein() <= 0 || getCarbs() <= 0 || getFat() <= 0) {
         QMessageBox::warning(this, "Invalid Input", "Please provide valid values for all fields.");
         return;

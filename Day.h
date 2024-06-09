@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DAY_H
+#define DAY_H
+
 #include <vector>
 #include "Meal.h"
 #include <fstream>
@@ -27,3 +29,5 @@ public:
     double getFat() const;
     void sumMacros();
 };
+
+#endif

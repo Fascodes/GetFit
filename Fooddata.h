@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FOODDATA_H
+#define FOODDATA_H
 
 #include <iostream>
 
@@ -17,3 +18,5 @@ struct FoodData{
             fatPer100g == other.fatPer100g);
     };
 };
+
+#endif

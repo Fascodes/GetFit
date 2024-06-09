@@ -24,12 +24,7 @@ void Meal::sumFood() {
     }
 }
 
-
-
-
-
-void Meal::editFood(const FoodData& food, const int grams, const int newGrams)
-{
+void Meal::editFood(const FoodData& food, const int grams, const int newGrams) {
     for (auto& item : mealFoods) {
         if (std::get<0>(item) == food) {
             std::get<1>(item) = newGrams;
@@ -40,6 +35,7 @@ void Meal::editFood(const FoodData& food, const int grams, const int newGrams)
 }
 
 void Meal::removeFood(const FoodData& other, const int otherGrams) {
+
     for (auto it = mealFoods.begin(); it != mealFoods.end(); ++it) {
         if (std::get<0>(*it) == other) {
             mealFoods.erase(it);
@@ -48,8 +44,6 @@ void Meal::removeFood(const FoodData& other, const int otherGrams) {
         }
     }
 }
-
-
 
 bool Meal::foodExists(const std::string& name) const {
     return std::any_of(mealFoods.begin(), mealFoods.end(), [&name](const std::tuple<FoodData, int>& item) {
@@ -61,30 +55,25 @@ void Meal::clear() {
     mealFoods.clear(); // Clear all food items from the vector
 }
 
-size_t Meal::getSize()
-{
+size_t Meal::getSize() {
     return mealFoods.size();
 };
 
-
-int Meal::getCalories() const
-{
+int Meal::getCalories() const {
     return this->calories;
 };
-double Meal::getProtein() const
-{
+double Meal::getProtein() const {
     return this->protein;
 };
-double Meal::getCarbs() const
-{
+double Meal::getCarbs() const {
     return this->carbs;
 };
-double Meal::getFat() const
-{
+double Meal::getFat() const {
     return this->fat;
 };
 
 std::ostream& operator<<(std::ostream& os, const Meal& meal) {
+
     for (const auto& item : meal.mealFoods) {
         const FoodData& food = std::get<0>(item);
         int grams = std::get<1>(item);

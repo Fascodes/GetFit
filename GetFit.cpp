@@ -75,8 +75,7 @@ GetFit::GetFit(QWidget* parent)
 GetFit::~GetFit()
 {}
 
-void GetFit::populateComboBox(QComboBox* comboBox)
-{
+void GetFit::populateComboBox(QComboBox* comboBox) {
     comboBox->clear();
 
     foods.readFood("foods.txt");
@@ -86,8 +85,7 @@ void GetFit::populateComboBox(QComboBox* comboBox)
         exit(-1);
     }
 
-    for (const auto& food : foods.getFood())
-    {
+    for (const auto& food : foods.getFood()) {
         QString itemText = QString("%1 - %2 calories %3 protein %4 carbs %5 fat / 100g")
             .arg(QString::fromStdString(food.name))
             .arg(food.caloriesPer100g)
@@ -99,8 +97,7 @@ void GetFit::populateComboBox(QComboBox* comboBox)
     }
 }
 
-void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBox* comboBox, QLineEdit* lineEdit)
-{
+void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBox* comboBox, QLineEdit* lineEdit) {
     QString selectedMeal = comboBox->currentText();
     bool ok;
     constexpr size_t foodLimit = 20;
@@ -138,7 +135,7 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
     // Create the container widget
     QWidget* containerWidget = new QWidget();
     QHBoxLayout* hLayout = new QHBoxLayout(containerWidget);
-    hLayout->setContentsMargins(0, 0, 0, 0);  // Optional: to remove the margins
+    hLayout->setContentsMargins(0, 0, 0, 0);
 
     // Create the label and buttons
     QLabel* newLabel = new QLabel(mealText);
@@ -186,8 +183,7 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
     updateSumLabel(meal, sumLabel);
 }
 
-void GetFit::removeMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel)
-{
+void GetFit::removeMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel) {
     // Clear the meal vector
     meal->clear();
 
@@ -202,8 +198,7 @@ void GetFit::removeMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel)
     updateSumLabel(meal, sumLabel);
 }
 
-void GetFit::updateSumLabel(Meal* meal, QLabel* sumLabel)
-{
+void GetFit::updateSumLabel(Meal* meal, QLabel* sumLabel) {
     QString sumText = QString("Total: %1 Calories, %2g Protein, %3g Carbs, %4g Fat")
         .arg(meal->getCalories())
         .arg(meal->getProtein())
@@ -214,9 +209,7 @@ void GetFit::updateSumLabel(Meal* meal, QLabel* sumLabel)
     updateDayLabel();
 }
 
-
-void GetFit::updateDayLabel()
-{
+void GetFit::updateDayLabel() {
     day.sumMacros();
     QString daySumText = QString("Day Total: %1 Calories, %2g Protein, %3g Carbs, %4g Fat")
         .arg(this->day.getCalories())
@@ -227,8 +220,8 @@ void GetFit::updateDayLabel()
     sumLabelDay->setText(daySumText);
 };
 
-void GetFit::addNewFood()
-{
+void GetFit::addNewFood() {
+
     NewFoodDialog newFoodDialog(this);
     if (newFoodDialog.exec() == QDialog::Accepted) {
         FoodData newFood;

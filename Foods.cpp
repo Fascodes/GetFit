@@ -1,8 +1,7 @@
 #include "Foods.h"
 #include <fstream>
 
-void Foods::readFood(const std::string& fileName)
-{
+void Foods::readFood(const std::string& fileName) {
     std::ifstream inputFile(fileName);
     if (!inputFile) {
         std::cerr << "Error opening file." << std::endl;
@@ -11,8 +10,7 @@ void Foods::readFood(const std::string& fileName)
     }
     FoodData temp;
     this->food_vector.clear();
-    while (inputFile >> temp.name >> temp.caloriesPer100g >> temp.proteinPer100g >> temp.carbsPer100g >> temp.fatPer100g)
-    {
+    while (inputFile >> temp.name >> temp.caloriesPer100g >> temp.proteinPer100g >> temp.carbsPer100g >> temp.fatPer100g) {
         this->food_vector.push_back(temp);
     };
     this->sortFoodByName();
@@ -43,8 +41,7 @@ std::ostream& operator<<(std::ostream& os, const FoodData& newFood) {
     return os;
 }
 
-void Foods::writeFood(FoodData newFood , const std::string& fileName)
-{
+void Foods::writeFood(FoodData newFood , const std::string& fileName) {
     std::ofstream outputFile(fileName, std::ios::app);
     if (!outputFile) {
         std::cerr << "Error opening file." << std::endl;
@@ -56,7 +53,6 @@ void Foods::writeFood(FoodData newFood , const std::string& fileName)
     outputFile.close();
 }
 
-void Foods::addFood(FoodData newFood)
-{
+void Foods::addFood(FoodData newFood) {
     this->food_vector.push_back(newFood);
 }

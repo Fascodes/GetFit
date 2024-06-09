@@ -1,8 +1,7 @@
 #include "Day.h"
 
 
-Meal& Day::getMeal(MealType mealType)
-{
+Meal& Day::getMeal(MealType mealType) {
     switch (mealType)
     {
     case Breakfast:
@@ -20,8 +19,7 @@ Meal& Day::getMeal(MealType mealType)
     }
 }
 
-int Day::getCalories() const
-{
+int Day::getCalories() const {
 	return this->calories;
 };
 
@@ -36,8 +34,8 @@ double Day::getCarbs() const {
 double Day::getFat() const {
 	return this->carbs;
 };
-void Day::sumMacros()
-{
+
+void Day::sumMacros() {
 	this->calories = this->breakfast.getCalories() + this->lunch.getCalories() + this->dinner.getCalories() + this->snack.getCalories() + this->supper.getCalories();
 	this->protein = this->breakfast.getProtein() + this->lunch.getProtein() + this->dinner.getProtein() + this->snack.getProtein() + this->supper.getProtein();
 	this->carbs = this->breakfast.getCarbs() + this->lunch.getCarbs() + this->dinner.getCarbs() + this->snack.getCarbs() + this->supper.getCarbs();

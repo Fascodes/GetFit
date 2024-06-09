@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef DIALOGBOXES_H
+#define DIALOGBOXES_H
 
 #include <QDialog>
 #include <QLineEdit>
@@ -54,3 +54,5 @@ private:
     QLineEdit* lineEditGrams;
     int grams;
 };
+
+#endif
