@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-struct FoodData {
+struct FoodData{
     std::string name;
     int caloriesPer100g;
     double proteinPer100g;

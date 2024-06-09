@@ -28,16 +28,6 @@ void Meal::sumFood() {
 
 
 
-
-
-//void Meal::removeFood(const FoodData& other, const int otherGrams) {
-//    size_t foodIndex = 0;
-//    while (foodIndex < mealFoods.size() && !(equal(mealFoods[foodIndex], other, otherGrams)))foodIndex++;
-//    
-//    mealFoods.erase(mealFoods.begin() + foodIndex);
-//    sumFood();
-//}
-
 void Meal::editFood(const FoodData& food, const int grams, const int newGrams)
 {
     for (auto& item : mealFoods) {
@@ -59,18 +49,7 @@ void Meal::removeFood(const FoodData& other, const int otherGrams) {
     }
 }
 
-void Meal::displayMeal() const {
-    std::cout << "Meal composition:\n";
-    for (const auto& item : mealFoods) {
-        const FoodData& food = std::get<0>(item);
-        int grams = std::get<1>(item);
-        std::cout << food.name << ": " << grams << "g\n";
-    }
-    std::cout << "Total Calories: " << calories << " kcal\n";
-    std::cout << "Total Protein: " << protein << " g\n";
-    std::cout << "Total Carbs: " << carbs << " g\n";
-    std::cout << "Total Fat: " << fat << " g\n";
-}
+
 
 bool Meal::foodExists(const std::string& name) const {
     return std::any_of(mealFoods.begin(), mealFoods.end(), [&name](const std::tuple<FoodData, int>& item) {
@@ -104,3 +83,20 @@ double Meal::getFat() const
 {
     return this->fat;
 };
+
+std::ostream& operator<<(std::ostream& os, const Meal& meal) {
+    for (const auto& item : meal.mealFoods) {
+        const FoodData& food = std::get<0>(item);
+        int grams = std::get<1>(item);
+        os << food.name << ": " << grams << " grams, "
+            << "Calories: " << (food.caloriesPer100g * grams) / 100 << ", "
+            << "Protein: " << (food.proteinPer100g * grams) / 100 << "g, "
+            << "Carbs: " << (food.carbsPer100g * grams) / 100 << "g, "
+            << "Fat: " << (food.fatPer100g * grams) / 100 << "g\n";
+    }
+    os << "Total: " << meal.calories << " Calories, "
+        << meal.protein << "g Protein, "
+        << meal.carbs << "g Carbs, "
+        << meal.fat << "g Fat\n";
+    return os;
+}
