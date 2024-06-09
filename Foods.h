@@ -11,9 +11,10 @@ private:
     std::vector<FoodData> food_vector;
 public:
     Foods() {};
-    void readFood(std::ifstream& inputFile);
+    void readFood(const std::string& fileName);
     const std::vector<FoodData>& getFood() const;
     const FoodData& getFoodIndex(size_t index) const;
     void sortFoodByName();
-    void writeFood(FoodData newFood, std::ofstream& outputFile);
+    void addFood(FoodData newFood);
+    void writeFood(FoodData newFood, const std::string& fileName);
 };

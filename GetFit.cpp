@@ -46,6 +46,9 @@ GetFit::GetFit(QWidget* parent)
     connect(ui.removeAllDinner, &QPushButton::clicked, [this]() { removeMeal(&day.getMeal(Day::Dinner), ui.verticalLayoutScrollAreaDinner, sumLabelDinner); });
     connect(ui.removeAllSnack, &QPushButton::clicked, [this]() { removeMeal(&day.getMeal(Day::Snack), ui.verticalLayoutScrollAreaSnack, sumLabelSnack); });
     connect(ui.removeAllSupper, &QPushButton::clicked, [this]() { removeMeal(&day.getMeal(Day::Supper), ui.verticalLayoutScrollAreaSupper, sumLabelSupper); });
+
+    // Connect the button for adding new Food
+    connect(ui.addNewFoodButton, &QPushButton::clicked, [this]() { addNewFood(&foods, ui.addNewFoodButton); });
     // Connect the comboBoxViewSelection to switch the stacked widget views
     connect(ui.comboBoxViewSelection, QOverload<int>::of(&QComboBox::currentIndexChanged),
         ui.stackedWidget, &QStackedWidget::setCurrentIndex);
@@ -56,9 +59,8 @@ GetFit::~GetFit()
 
 void GetFit::populateComboBox(QComboBox* comboBox)
 {
-    std::ifstream inputFile("foods.txt");
-    Foods foods;
-    foods.readFood(inputFile);
+    
+    foods.readFood("foods.txt");
     if (foods.getFood().empty()) {
         QMessageBox::warning(this, "Error: Reading File", "Check the foods.txt file");
         QCoreApplication::quit();
@@ -200,3 +202,18 @@ void GetFit::updateDayLabel()
 
     sumLabelDay->setText(daySumText);
 };
+
+void GetFit::addNewFood(Foods* Foodlist, QPushButton* button)
+{
+    NewFoodDialog newfoodDialog(this);
+    if (newfoodDialog.exec() == QDialog::Accepted) {
+        if (newfoodDialog.getName().empty() || newfoodDialog.getCalories() <= 0 || newfoodDialog.getCalories() > 100 ||
+            newfoodDialog.getProtein() <= 0 || newfoodDialog.getProtein() > 100 || newfoodDialog.getCarbs() <= 0 ||
+            newfoodDialog.getCarbs() > 100 || newfoodDialog.getFat() <= 0 || newfoodDialog.getFat() > 100) {
+            QMessageBox::warning(this, "Invalid Input", "Please provide correct values.");
+            return;
+        }
+        Foodlist->addFood({ newfoodDialog.getName(), newfoodDialog.getCalories(), newfoodDialog.getProtein(),
+                           newfoodDialog.getCarbs(), newfoodDialog.getFat() });
+    }
+}

@@ -1,8 +1,9 @@
 #include "Foods.h"
 #include <fstream>
 
-void Foods::readFood(std::ifstream& inputFile)
+void Foods::readFood(const std::string& fileName)
 {
+    std::ifstream inputFile(fileName);
     if (!inputFile) {
         std::cerr << "Error opening file." << std::endl;
         inputFile.close();
@@ -41,12 +42,20 @@ std::ostream& operator<<(std::ostream& os, const FoodData& newFood) {
     return os;
 }
 
-void Foods::writeFood(FoodData newFood ,std::ofstream& outputFile)
+void Foods::writeFood(FoodData newFood , const std::string& fileName)
 {
+    std::ofstream outputFile(fileName, std::ios::app);
     if (!outputFile) {
         std::cerr << "Error opening file." << std::endl;
         outputFile.close();
         return;
     }
     outputFile << newFood << std::endl;
+
+    outputFile.close();
+}
+
+void Foods::addFood(FoodData newFood)
+{
+    this->food_vector.push_back(newFood);
 }
