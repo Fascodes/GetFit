@@ -1,7 +1,7 @@
 #include "Meal.h"
 
 void Meal::addFood(const FoodData food, int grams) {
-    meal.push_back(std::make_tuple(food, grams));
+    mealFoods.push_back(std::make_tuple(food, grams));
 
     calories += (food.caloriesPer100g * grams) / 100;
     protein += (food.proteinPer100g * grams) / 100;
@@ -14,7 +14,7 @@ void Meal::sumFood() {
     protein = 0.0;
     carbs = 0.0;
     fat = 0.0;
-    for (const auto& item : meal) {
+    for (const auto& item : mealFoods) {
         const FoodData& food = std::get<0>(item);
         int grams = std::get<1>(item);
         calories += (food.caloriesPer100g * grams) / 100;
@@ -25,33 +25,43 @@ void Meal::sumFood() {
 }
 
 
-bool equal(std::tuple<FoodData, int> food, const FoodData& other, const int otherGrams)
-{
-    return other.caloriesPer100g == std::get<0>(food).caloriesPer100g && other.proteinPer100g == std::get<0>(food).proteinPer100g && other.carbsPer100g == std::get<0>(food).carbsPer100g && other.fatPer100g == std::get<0>(food).fatPer100g && std::get<1>(food) == otherGrams;
-};
 
-void Meal::editFood(const FoodData& food, const int grams, const int newGrams) 
+
+
+
+
+//void Meal::removeFood(const FoodData& other, const int otherGrams) {
+//    size_t foodIndex = 0;
+//    while (foodIndex < mealFoods.size() && !(equal(mealFoods[foodIndex], other, otherGrams)))foodIndex++;
+//    
+//    mealFoods.erase(mealFoods.begin() + foodIndex);
+//    sumFood();
+//}
+
+void Meal::editFood(const FoodData& food, const int grams, const int newGrams)
 {
-    for (const auto& item : meal) {
-        const FoodData& food = std::get<0>(item);
-        int grams = std::get<1>(item);
+    for (auto& item : mealFoods) {
+        if (std::get<0>(item) == food) {
+            std::get<1>(item) = newGrams;
+            sumFood();
+            return;
+        }
     }
-    sumFood();
 }
 
-
-
 void Meal::removeFood(const FoodData& other, const int otherGrams) {
-    size_t foodIndex = 0;
-    while (foodIndex < meal.size() && !(equal(meal[foodIndex], other, otherGrams)))foodIndex++;
-    
-    meal.erase(meal.begin() + foodIndex);
-    sumFood();
+    for (auto it = mealFoods.begin(); it != mealFoods.end(); ++it) {
+        if (std::get<0>(*it) == other) {
+            mealFoods.erase(it);
+            sumFood();
+            return;
+        }
+    }
 }
 
 void Meal::displayMeal() const {
     std::cout << "Meal composition:\n";
-    for (const auto& item : meal) {
+    for (const auto& item : mealFoods) {
         const FoodData& food = std::get<0>(item);
         int grams = std::get<1>(item);
         std::cout << food.name << ": " << grams << "g\n";
@@ -63,23 +73,28 @@ void Meal::displayMeal() const {
 }
 
 void Meal::clear() {
-    meal.clear(); // Clear all food items from the vector
+    mealFoods.clear(); // Clear all food items from the vector
 }
 
+size_t Meal::getSize()
+{
+    return mealFoods.size();
+};
 
-int Meal::getCalories()
+
+int Meal::getCalories() const
 {
     return this->calories;
 };
-double Meal::getProtein()
+double Meal::getProtein() const
 {
     return this->protein;
 };
-double Meal::getCarbs()
+double Meal::getCarbs() const
 {
     return this->carbs;
 };
-double Meal::getFat()
+double Meal::getFat() const
 {
     return this->fat;
 };

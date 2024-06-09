@@ -24,6 +24,7 @@ GetFit::GetFit(QWidget* parent)
     sumLabelDinner = ui.sumLabelDinner;
     sumLabelSnack = ui.sumLabelSnack;
     sumLabelSupper = ui.sumLabelSupper;
+    sumLabelDay = ui.sumLabelDay;
 
     // Populate the comboBoxes with data
     populateComboBox(ui.comboBoxBreakfast);
@@ -76,9 +77,16 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
 {
     QString selectedMeal = comboBox->currentText();
     bool ok;
+    constexpr size_t foodLimit = 20;
     int grams = lineEdit->text().toInt(&ok);
-    if (!ok || grams <= 0) {
+    if (!ok || grams <= 0 || grams > 10000) {
         QMessageBox::warning(this, "Invalid Input", "Please enter a valid number of grams.");
+        return;
+    }
+
+    size_t currSize = meal->getSize();
+    if (currSize >= foodLimit) {
+        QMessageBox::warning(this, "Limit reached", "You have reached the limit of foods for this meal.");
         return;
     }
 
@@ -127,7 +135,7 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
     connect(editButton, &QPushButton::clicked, [this, containerWidget, meal, layout, sumLabel, foodData, grams, newLabel]() {
         EditMealDialog editDialog(QString::fromStdString(foodData.name), grams, this);
         if (editDialog.exec() == QDialog::Accepted) {
-            if (editDialog.getGrams() <= 0) {
+            if (editDialog.getGrams() <= 0 || editDialog.getGrams() > 10000) {
                 QMessageBox::warning(this, "Invalid Input", "Please enter a valid number of grams.");
                 return;
             }
@@ -140,6 +148,7 @@ void GetFit::addMeal(Meal* meal, QVBoxLayout* layout, QLabel* sumLabel, QComboBo
                 .arg((foodData.proteinPer100g * newGrams) / 100)
                 .arg((foodData.carbsPer100g * newGrams) / 100)
                 .arg((foodData.fatPer100g * newGrams) / 100));
+            meal->sumFood();
             updateSumLabel(meal, sumLabel);
         }
         });
@@ -172,4 +181,26 @@ void GetFit::updateSumLabel(Meal* meal, QLabel* sumLabel)
         .arg(meal->getFat());
 
     sumLabel->setText(sumText);
+    updateDayLabel();
 }
+
+void GetFit::sumMacros()
+{
+    this->calories = this->breakfast.getCalories() + this->lunch.getCalories() + this->dinner.getCalories() + this->snack.getCalories() + this->supper.getCalories();
+    this->protein = this->breakfast.getProtein() + this->lunch.getProtein() + this->dinner.getProtein() + this->snack.getProtein() + this->supper.getProtein();
+    this->carbs = this->breakfast.getCarbs() + this->lunch.getCarbs() + this->dinner.getCarbs() + this->snack.getCarbs() + this->supper.getCarbs();
+    this->fat = this->breakfast.getFat() + this->lunch.getFat() + this->dinner.getFat() + this->snack.getFat() + this->supper.getFat();
+};
+
+
+void GetFit::updateDayLabel()
+{
+    sumMacros();
+    QString daySumText = QString("Day Total: %1 Calories, %2g Protein, %3g Carbs, %4g Fat")
+        .arg(this->calories)
+        .arg(this->protein)
+        .arg(this->carbs)
+        .arg(this->fat);
+
+    sumLabelDay->setText(daySumText);
+};
